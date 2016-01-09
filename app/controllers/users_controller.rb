@@ -20,15 +20,19 @@ class UsersController < ApplicationController
   end
   
   def edit
-    #if current_user != current_user
-    #  redirect_to root_path
-    #end
     @user = User.find(params[:id])
+    if current_user != @user
+      redirect_to root_path
+    end
   end
   
   def update
     @user = User.find(params[:id])
-    if @user = User.new(user_params)
+    if current_user != @user
+      redirect_to root_path
+    end
+    
+    if @user.update(user_params)
       redirect_to root_path , notice: '更新しました'
     else
       render 'edit'
@@ -38,7 +42,8 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation,
+                                 :location, :profile)
   end
 
 end
