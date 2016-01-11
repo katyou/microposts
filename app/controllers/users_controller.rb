@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.order(created_at: :desc)
   end
   
   def new
@@ -20,7 +21,11 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
+<<<<<<< HEAD
     if current_user != @user
+=======
+    if current_user != current_user
+>>>>>>> practice2
       redirect_to root_path
     end
   end
@@ -36,6 +41,17 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+  
+  #フォローしている人
+  def followings
+    @user = User.find(params[:id])
+    @users = @user.following_users #@userがフォローしている人
+  end
+  
+  #フォローしてくれた人
+  def followers
+    @user = User.find(params[:followed_id])
   end
   
   private
