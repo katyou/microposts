@@ -21,11 +21,7 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
-<<<<<<< HEAD
-    if current_user != @user
-=======
     if current_user != current_user
->>>>>>> practice2
       redirect_to root_path
     end
   end
@@ -51,7 +47,8 @@ class UsersController < ApplicationController
   
   #フォローしてくれた人
   def followers
-    @user = User.find(params[:followed_id])
+    @user = User.find(params[:id])
+    @users = @user.follower_users #@userをフォローしてくれている人
   end
   
   private

@@ -1,0 +1,18 @@
+<div class = "row">
+    <div class="col-md-8">
+    <% if @users.any? %>
+    <h3>Followers (<%= @users.count %>)</h3>
+      <% @users.each do |user| %>
+      
+        <%= user.name %>
+      
+      <% end %>
+      <!--
+      <ol class="users">
+           <%#= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
+           <span class="user"><%#= link_to micropost.user.name, micropost.user %></span>
+      </ol>
+      -->
+    <% end %>
+  </div>
+</div>
