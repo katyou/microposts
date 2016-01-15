@@ -1,0 +1,11 @@
+<div class = "row">
+    <div class = "col-md-4">
+        <% if @users.any? %>
+        <h3>Favorites </h3>
+        <div class = "col-md-8">
+            <% @users.each do |user| %>
+            <ol class = "microposts">
+                <%= render @microposts %>
+            </ol>
+        </div>
+    </div>

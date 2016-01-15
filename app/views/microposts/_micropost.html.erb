@@ -4,8 +4,10 @@
     <span class = "content"><%= micropost.content %></span>
     <span class = "timestamp">
         Posted <%= time_ago_in_words(micropost.created_at) %>ago.
+        <%#= render %>
         <% if current_user == micropost.user %>
           <%= link_to "delete", micropost, method: :delete, data: {confirm: "you sure?" } %>
         <% end %>
     </span>
+    <!--お気に入りボタンをつける micropostのid(micropost.id)を送信-->
 </li>
