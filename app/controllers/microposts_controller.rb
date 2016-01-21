@@ -19,8 +19,15 @@ class MicropostsController < ApplicationController
         flash[:success] = "Micopost deleted"
         redirect_to request.referrer || root_url
     end
+    #お気に入りに追加したもの
+    def favorite
+        @micropost = Micropost.find(params[:id])
+        @microposts = @micropost.favoriting_users #@userがお気に入りしている投稿内容
+        @users = @microposts.microposts.order(created_at: :desc)
+    end
     
     private
+    
     def micropost_params
         params.require(:micropost).permit(:content)
     end

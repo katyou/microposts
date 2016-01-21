@@ -10,4 +10,8 @@ module SessionsHelper
     def store_location
        session[:forwarding_url] = request.url if request.get?
     end
+    
+    #def current_micropost
+       # @current_micropost ||= Micropost.find_by(id: session[:micropost_id])
+    #end
 end

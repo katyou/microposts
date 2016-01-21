@@ -51,6 +51,15 @@ class UsersController < ApplicationController
     @users = @user.follower_users #@userをフォローしてくれている人
   end
   
+  
+  #お気に入りに追加したもの
+  def favorite
+    @user = User.find(params[:id])
+    @users = @user.favoriting_users #@userがお気に入りしている人
+    @microposts = @users.microposts.order(created_at: :desc)
+  end
+  
+  
   private
   
   def user_params
