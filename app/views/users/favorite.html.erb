@@ -1,11 +1,12 @@
 <div class = "row">
     <div class = "col-md-4">
-        <h3>Favorites </h3>
-        <div class = "col-md-8">
-            <% current_user.favorite_microposts.each do |favorite| %>
-              <%= favorite.content %><br>
-              <%= favorite.user.name %><br><br>
-            <% end %>
-        </div>
+        <% if @favorites.any? %>
+          <h3>Favorites </h3>
+          <div class = "col-md-8">
+            <ol class="microposts">
+              <%= render @favorites %>
+            </ol>  
+          </div>
+        <% end %>
     </div>
 </div>

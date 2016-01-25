@@ -21,17 +21,6 @@ class User < ActiveRecord::Base
     #あるユーザーがお気入りに入れているmicropostのモデルをfavoritesのidたちから取得
     has_many :favorite_microposts, through: :favorites, source: :micropost
     
-    #has_many :favoriting_favorites, class_name: "Favorite",
-    #                                foreign_key: "favorite_id",
-    #                                dependent: :destroy
-    #has_many :favoriting_users, through: :favoriting_favorites, source: :favorited
-    #has_many :favorited_favorites, class_name: "Favorite",
-                                   #foreign_key: "favorited_id",
-                                   #dependent: :destroy
-    #has_many :favorited_users, through: :favorited_favorites, source: :favorite
-    
-    
-      
  
     #他のユーザーをフォローする
     def follow(other_user)
@@ -54,17 +43,20 @@ class User < ActiveRecord::Base
         Micropost.where(user_id: following_user_ids + [self.id])
     end
     
+    #お気に入り取得のためのメソッド
+    def favorite_items
+        Favorite.where(user_id: favorite_user_ids + [self.id])
+    end
+    
     
      #ほかのユーザーのメッセージをお気に入りにいれる
-     def favorite(micropost_id)
-         favorites.find_or_create_by(micropost_id: micropost_id)
+     def favorite(micropost)
+         #favorites.find_or_create_by(micropost)
+         favorites.find_or_create_by(micropost_id: micropost)
      end
      
      
-     def feed
-         Micropost.where(user_id: favoriting_user_ids)
-     end
-     
+
      #お気に入りを解除する
      def unfavorite(micropost_id)
          favorites = favorites(micropost_id)
