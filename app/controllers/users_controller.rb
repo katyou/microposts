@@ -30,6 +30,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if current_user != @user
       redirect_to root_path
+      return
     end
     
     if @user.update(user_params)
